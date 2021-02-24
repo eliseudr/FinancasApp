@@ -1,5 +1,6 @@
-import 'package:financas/transacoes.dart';
 import 'package:flutter/material.dart';
+
+import './widgets/usuario_transacoes.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,21 +15,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transacoes> transacoes = [
-    Transacoes(
-      id: 't1',
-      titulo: 'Lanche sanduiche',
-      valor: 32.45,
-      data: DateTime.now(),
-    ),
-    Transacoes(
-      id: 't2',
-      titulo: 'Mouse',
-      valor: 250,
-      data: DateTime.now(),
-    )
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,35 +29,9 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue,
                 child: Text('CHART', textAlign: TextAlign.center)),
           ),
-          _transacao(),
+          UsuarioTransacoes(),
         ],
       ),
-    );
-  }
-
-  Column _transacao() {
-    return Column(
-      children: transacoes.map((tx) {
-        return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2)),
-                padding: EdgeInsets.all(10),
-                child: Text(tx.valor.toString()),
-              ),
-              Column(
-                children: <Widget>[
-                  Text(tx.titulo),
-                  Text(tx.data.toString()),
-                ],
-              ),
-            ],
-          ),
-        );
-      }).toList(),
     );
   }
 }
