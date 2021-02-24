@@ -23,8 +23,8 @@ class MyHomePage extends StatelessWidget {
     ),
     Transacoes(
       id: 't2',
-      titulo: 'Computador novo',
-      valor: 5.0000,
+      titulo: 'Mouse',
+      valor: 250,
       data: DateTime.now(),
     )
   ];
@@ -43,15 +43,35 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue,
                 child: Text('CHART', textAlign: TextAlign.center)),
           ),
-          Column(
-            children: transacoes.map((tx) {
-              return Card(
-                child: Text(tx.titulo),
-              );
-            }).toList(),
-          ),
+          _transacao(),
         ],
       ),
+    );
+  }
+
+  Column _transacao() {
+    return Column(
+      children: transacoes.map((tx) {
+        return Card(
+          child: Row(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2)),
+                padding: EdgeInsets.all(10),
+                child: Text(tx.valor.toString()),
+              ),
+              Column(
+                children: <Widget>[
+                  Text(tx.titulo),
+                  Text(tx.data.toString()),
+                ],
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 }
