@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class NovaTransacao extends StatelessWidget {
+class NovaTransacao extends StatefulWidget {
   final Function addTx;
-  final tituloControler = TextEditingController();
-  final valorControler = TextEditingController();
 
   NovaTransacao(this.addTx);
+
+  @override
+  _NovaTransacaoState createState() => _NovaTransacaoState();
+}
+
+class _NovaTransacaoState extends State<NovaTransacao> {
+  final tituloControler = TextEditingController();
+
+  final valorControler = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +46,6 @@ class NovaTransacao extends StatelessWidget {
     );
   }
 
-  //Adicionar a transaçao na lista
   void submitData() {
     final tituloEntrado = tituloControler.text;
     final valorEntrado = double.parse(valorControler.text);
@@ -48,9 +54,11 @@ class NovaTransacao extends StatelessWidget {
       return;
     }
 
-    addTx(
+    widget.addTx(
       tituloEntrado,
       valorEntrado,
     );
+
+    Navigator.of(context).pop();
   }
 }

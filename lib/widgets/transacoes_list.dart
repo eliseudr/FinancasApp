@@ -17,10 +17,12 @@ class ListaTransacoes extends StatelessWidget {
           return Card(
             child: Row(
               children: <Widget>[
+                //Campo do valor
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 2)),
+                      border: Border.all(
+                          color: Theme.of(context).primaryColor, width: 2)),
                   padding: EdgeInsets.all(10),
                   child: Text(
                     'R\$ ${transacoes[index].valor.toStringAsFixed(2)}',
@@ -32,10 +34,8 @@ class ListaTransacoes extends StatelessWidget {
                   children: <Widget>[
                     //Titulo da transacao
                     Text(transacoes[index].titulo,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        )),
+                        // ignore: deprecated_member_use
+                        style: Theme.of(context).textTheme.title),
                     //Data da transacao
                     Text(DateFormat.yMMMd().format(transacoes[index].data),
                         style:

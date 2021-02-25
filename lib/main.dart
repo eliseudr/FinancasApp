@@ -12,6 +12,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Finanças',
       home: MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.cyan,
+        fontFamily: 'Quicksand',
+        //Tema geral da aplicacao
+        textTheme: ThemeData.light().textTheme.copyWith(
+              // ignore: deprecated_member_use
+              title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        ),
+      ),
     );
   }
 }
