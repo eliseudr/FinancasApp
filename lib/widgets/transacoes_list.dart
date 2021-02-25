@@ -10,39 +10,44 @@ class ListaTransacoes extends StatelessWidget {
   @override
   //Campos onde ficaram registrados os gastos
   Widget build(BuildContext context) {
-    return Column(
-      children: transacoes.map((tx) {
-        return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2)),
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  'R\$ ${tx.valor}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    return Container(
+      height: 400,
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
+          return Card(
+            child: Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2)),
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'R\$ ${transacoes[index].valor.toStringAsFixed(2)}',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  //Titulo da transacao
-                  Text(tx.titulo,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      )),
-                  //Data da transacao
-                  Text(DateFormat.yMMMd().format(tx.data),
-                      style: TextStyle(color: Colors.grey[850], fontSize: 12)),
-                ],
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    //Titulo da transacao
+                    Text(transacoes[index].titulo,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        )),
+                    //Data da transacao
+                    Text(DateFormat.yMMMd().format(transacoes[index].data),
+                        style:
+                            TextStyle(color: Colors.grey[850], fontSize: 12)),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+        itemCount: transacoes.length,
+      ),
     );
   }
 }
