@@ -28,38 +28,20 @@ class ListaTransacoes extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
-                  child: Row(
-                    children: <Widget>[
-                      //Campo do valor
-                      Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'R\$ ${transacoes[index].valor.toStringAsFixed(2)}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          //Titulo da transacao
-                          Text(transacoes[index].titulo,
-                              // ignore: deprecated_member_use
-                              style: Theme.of(context).textTheme.title),
-                          //Data da transacao
-                          Text(
-                              DateFormat.yMMMd().format(transacoes[index].data),
-                              style: TextStyle(
-                                  color: Colors.grey[850], fontSize: 12)),
-                        ],
-                      ),
-                    ],
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                          padding: EdgeInsets.all(2),
+                          child: FittedBox(
+                              child: Text('R\$${transacoes[index].valor}'))),
+                    ),
+                    title: Text(transacoes[index].titulo,
+                        style: Theme.of(context).textTheme.title),
+                    subtitle:
+                        Text(DateFormat.yMMMd().format(transacoes[index].data)),
                   ),
                 );
               },

@@ -26,7 +26,7 @@ class Grafico extends StatelessWidget {
         'dia': DateFormat.E().format(diaSemana).substring(0, 3),
         'valor': somaTotal
       };
-    });
+    }).reversed.toList();
   }
 
   double get gastoTotal {
@@ -42,12 +42,23 @@ class Grafico extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      margin: EdgeInsets.all(20),
-      child: Row(
-        children: valoresAgrupados.map((data) {
-          return BarraGrafico(data['dia'], data['valor'],
-              gastoTotal == 0.0 ? 0.0 : (data['valor'] as double) / gastoTotal);
-        }).toList(),
+      margin: EdgeInsets.all(10),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: valoresAgrupados.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: BarraGrafico(
+                  data['dia'],
+                  data['valor'],
+                  gastoTotal == 0.0
+                      ? 0.0
+                      : (data['valor'] as double) / gastoTotal),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
