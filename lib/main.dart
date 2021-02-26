@@ -1,8 +1,10 @@
+import 'package:financas/widgets/grafico.dart';
 import 'package:flutter/material.dart';
 
 import './widgets/nova_transacao.dart';
 import './models/transacoes.dart';
 import './widgets/transacoes_list.dart';
+import './widgets/grafico.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,19 +49,29 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transacoes> _usuarioTransacoes = [
-    Transacoes(
-      id: 't1',
-      titulo: 'Lanche sanduiche',
-      valor: 32.45,
-      data: DateTime.now(),
-    ),
-    Transacoes(
-      id: 't2',
-      titulo: 'Mouse',
-      valor: 250,
-      data: DateTime.now(),
-    )
+    // Transacoes(
+    //   id: 't1',
+    //   titulo: 'Lanche sanduiche',
+    //   valor: 32.45,
+    //   data: DateTime.now(),
+    // ),
+    // Transacoes(
+    //   id: 't2',
+    //   titulo: 'Mouse',
+    //   valor: 250,
+    //   data: DateTime.now(),
+    // )
   ];
+
+  List<Transacoes> get _transacoesRecentes {
+    return _usuarioTransacoes.where((tx) {
+      return tx.data.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _adicionarNovaTransacao(String novoTitulo, double novoValor) {
     final novaTx = Transacoes(
@@ -102,12 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                  color: Colors.blue,
-                  child: Text('CHART', textAlign: TextAlign.center)),
-            ),
+            Grafico(_transacoesRecentes),
             ListaTransacoes(_usuarioTransacoes),
           ],
         ),
